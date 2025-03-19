@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arimanuk <arimanuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 21:01:13 by arimanuk          #+#    #+#             */
-/*   Updated: 2025/03/16 00:02:56 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/19 16:58:58 by arimanuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	a[i + j] = '\0';
-	// printf("es->%s\n" ,s1);
-	// free(s1);
-	// s1 = NULL;
-	// printf("vaaaay->%s\n" ,a);
-
 	return (a);
 }

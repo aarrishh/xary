@@ -6,7 +6,7 @@
 /*   By: arimanuk <arimanuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 21:01:13 by arimanuk          #+#    #+#             */
-/*   Updated: 2025/03/18 22:19:56 by arimanuk         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:49:47 by arimanuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	nl_exists(char *buffer)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (buffer == NULL)
@@ -30,9 +30,9 @@ int	nl_exists(char *buffer)
 
 char	*left_over(char *str_join)
 {
-	int i;
-	int j;
-	int malloc_len;
+	int		i;
+	int		j;
+	int		malloc_len;
 	char*	res;
 
 	j = 0;
@@ -52,7 +52,7 @@ char	*left_over(char *str_join)
 
 char	*cur_line(char *str_join)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str_join[i] && str_join[i] != '\n')
@@ -72,18 +72,28 @@ char	*get_next_line(int fd)
 	buffer = NULL;
 	str_join = NULL;
 	count_bytes = 1;
-	while (nl_exists(buffer) == 0 && count_bytes != 0)
+	while (nl_exists(buffer) == 0 && count_bytes != 0)//stuguma \n-y, ete  
 	{	
 		free(buffer);
 		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (buffer == NULL)
 		{
+			if (str_join)
+				free(str_join);
+			if (result)
+				free(result);
 			free(buffer);
 			return (NULL);
 		}
 		count_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (count_bytes == -1)
+		{
+			if (str_join)
+				free(str_join);
+			if (result)
+				free(result);
 			return (NULL);
+		}
 		buffer[count_bytes] = '\0';
 		str_join = ft_strjoin(result, buffer);
 		if (result)
@@ -96,7 +106,9 @@ char	*get_next_line(int fd)
 	if (*result == '\0' && count_bytes == 0)
 	{
 		free(buffer);
+		buffer = NULL;
 		free(str_join);
+		str_join = NULL;
 		free(result);
 		result = NULL;
 		return (NULL);
